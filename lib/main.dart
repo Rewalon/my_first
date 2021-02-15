@@ -8,33 +8,68 @@ class ScreenWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text('Колонки и столбцы')),
+          title: Center(child: const Text('ListView Widget')),
         ),
-        body: SimpleWidget(),
+        body: ListViewCustomWidget(),
       ),
     );
   }
 }
 
 class TextWidget extends StatelessWidget {
-  const TextWidget({Key key, this.text, this.color, this.width, this.fontSize})
-      : super(key: key);
+  const TextWidget({Key key, this.text}) : super(key: key);
 
   final String text;
-  final Color color;
-  final double width;
-  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: width,
-        color: color,
-        height: 100,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(5),
+        decoration:
+            BoxDecoration(border: Border.all(color: Colors.black, width: 1)),
         child: Text(
           text,
-          style: TextStyle(fontSize: fontSize),
+          style: TextStyle(fontSize: 40),
         ));
+  }
+}
+
+class ListViewCustomWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.custom(childrenDelegate:
+        SliverChildBuilderDelegate((BuildContext context, int index) {
+      return TextWidget(text: "$index");
+    }));
+  }
+}
+
+class ListViewBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        // itemCount: 20,
+        itemBuilder: (BuildContext context, int index) {
+      return TextWidget(text: '$index');
+    });
+  }
+}
+
+class ListViewSeparatedWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          return TextWidget(
+            text: "$index",
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider(color: Colors.blueAccent);
+        },
+        itemCount: 20);
   }
 }
 
@@ -42,32 +77,43 @@ class SimpleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      textBaseline: TextBaseline.alphabetic,
-      textDirection: TextDirection.rtl,
-      verticalDirection: VerticalDirection.up,
+    return ListView(
+      // scrollDirection: Axis.horizontal,
+      //reverse: true,
+      //controller: ScrollController(initialScrollOffset: 100),
+      //physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.all(20),
       children: <Widget>[
         TextWidget(
-          color: Colors.limeAccent,
-          width: 110,
-          text: 'Первый',
-          fontSize: 20,
+          text: "1",
         ),
         TextWidget(
-          color: Colors.cyanAccent,
-          width: 140,
-          text: 'Второй',
-          fontSize: 30,
+          text: "2",
         ),
         TextWidget(
-          color: Colors.purpleAccent,
-          width: 100,
-          text: 'Третий',
-          fontSize: 30,
+          text: "3",
         ),
+        TextWidget(
+          text: "4",
+        ),
+        TextWidget(
+          text: "5",
+        ),
+        TextWidget(
+          text: "6",
+        ),
+        TextWidget(
+          text: "7",
+        ),
+        TextWidget(
+          text: "8",
+        ),
+        TextWidget(
+          text: "9",
+        ),
+        TextWidget(
+          text: "10",
+        )
       ],
     );
   }
