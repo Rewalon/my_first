@@ -8,11 +8,46 @@ class ScreenWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text('GridView Widget')),
+          title: Center(child: const Text('GridView EXtent Widget')),
         ),
-        body: GridViewBuilderWidget(),
+        body: GridViewExtentWidget(),
       ),
     );
+  }
+}
+
+class GridViewExtentWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final queryData = MediaQuery.of(context);
+    print(queryData.size);
+
+    return Container(
+        width: 300,
+        color: Colors.greenAccent,
+        child: GridView.extent(
+          maxCrossAxisExtent: 100,
+          children: [
+            TextWidget(
+              text: "1",
+            ),
+            TextWidget(
+              text: "2",
+            ),
+            TextWidget(
+              text: "3",
+            ),
+            TextWidget(
+              text: "4",
+            ),
+            TextWidget(
+              text: "5",
+            ),
+            TextWidget(
+              text: "6",
+            ),
+          ],
+        ));
   }
 }
 
