@@ -8,11 +8,34 @@ class ScreenWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text('GridView EXtent Widget')),
+          title: Center(child: const Text('GridViewCustomWidget Widget')),
         ),
-        body: GridViewExtentWidget(),
+        body: GridViewCustomWidget(),
       ),
     );
+  }
+}
+
+class GridViewCustomWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return GridView.custom(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+//        childrenDelegate: SliverChildListDelegate([
+//          TextWidget(
+//            text: "1",
+//          ),
+//          TextWidget(
+//            text: "2",
+//          ),
+//          TextWidget(
+//            text: "3",
+//          ),]));
+        childrenDelegate: SliverChildBuilderDelegate((context, index) {
+          return TextWidget(text: '$index');
+        }, childCount: 15));
   }
 }
 
