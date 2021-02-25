@@ -8,11 +8,66 @@ class ScreenWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text('ListView Widget')),
+          title: Center(child: const Text('GridView Widget')),
         ),
-        body: ListViewCustomWidget(),
+        body: GridViewWidget(),
       ),
     );
+  }
+}
+
+class GridViewWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        reverse: true,
+        children: <Widget>[
+          TextWidget(
+            text: "1",
+          ),
+          TextWidget(
+            text: "2",
+          ),
+          TextWidget(
+            text: "3",
+          ),
+          TextWidget(
+            text: "4",
+          ),
+          TextWidget(
+            text: "5",
+          ),
+          TextWidget(
+            text: "6",
+          ),
+          TextWidget(
+            text: "7",
+          ),
+          TextWidget(
+            text: "8",
+          ),
+          TextWidget(
+            text: "9",
+          ),
+          TextWidget(
+            text: "10",
+          ),
+          TextWidget(
+            text: "11",
+          ),
+          TextWidget(
+            text: "12",
+          ),
+          TextWidget(
+            text: "13",
+          ),
+          TextWidget(
+            text: "14",
+          )
+        ]);
   }
 }
 
