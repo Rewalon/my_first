@@ -10,9 +10,25 @@ class ScreenWidget extends StatelessWidget {
         appBar: AppBar(
           title: Center(child: const Text('GridView Widget')),
         ),
-        body: GridViewWidget(),
+        body: GridViewBuilderWidget(),
       ),
     );
+  }
+}
+
+class GridViewBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        // itemCount: 10,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (context, index) {
+          return TextWidget(
+            text: '$index',
+          );
+        });
   }
 }
 
@@ -23,7 +39,7 @@ class GridViewWidget extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
         ),
-        reverse: true,
+        //reverse: true,
         children: <Widget>[
           TextWidget(
             text: "1",
