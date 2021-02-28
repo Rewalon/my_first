@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(ScreenWidget());
@@ -8,10 +10,91 @@ class ScreenWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text('GridViewCustomWidget Widget')),
+          title: Center(child: const Text('PageView Widget')),
         ),
-        body: GridViewCustomWidget(),
+        body: PageViewCustomWidget(),
       ),
+    );
+  }
+}
+
+class PageViewCustomWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PageView.custom(
+      childrenDelegate: SliverChildListDelegate([
+        Text('1'),
+        Text('2'),
+        Text('3'),
+      ]),
+    );
+  }
+}
+
+class PageViewBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+        // itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+      return Container(
+        color: index % 2 == 0 ? Colors.red : Colors.green,
+        alignment: Alignment.center,
+        child: Text('$index'),
+      );
+    });
+  }
+}
+
+class PageViewWidget extends StatelessWidget {
+  final PageController controller = PageController(initialPage: 2);
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      scrollDirection: Axis.vertical,
+      pageSnapping: true,
+      //  physics: BouncingScrollPhysics(),
+      //physics: NeverScrollableScrollPhysics(),
+      controller: controller,
+      onPageChanged: (number) {
+        print("Page number $number");
+      },
+      children: [
+        Container(
+          color: Colors.red,
+          child: Center(
+            child: Text('STOP!'),
+          ),
+        ),
+        Container(
+          color: Colors.yellow,
+          child: Center(
+            child: Text('READY!'),
+          ),
+        ),
+        Container(
+          color: Colors.green,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'GO!',
+                style: TextStyle(fontSize: 40),
+              ),
+              RaisedButton(
+                  child: Text('Reload'),
+                  color: Colors.blue,
+                  onPressed: () {
+                    //controller.jumpToPage(0);
+                    controller.animateToPage(1,
+                        duration: Duration(seconds: 2),
+                        curve: Curves.easeInBack);
+                  })
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
